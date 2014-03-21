@@ -48,6 +48,7 @@
     var compiledFilter;
     var compiledFilterWithCaching;
     var filterCache = [];
+    var newId = 0;
 
     // grouping
     var groupingInfoDefaults = {
@@ -103,7 +104,7 @@
       for (var i = startingIndex, l = items.length; i < l; i++) {
         id = items[i][idProperty];
         if (id === undefined) {
-          throw "Each data element must implement a unique 'id' property";
+            items[i][idProperty] = newId++;
         }
         idxById[id] = i;
       }
@@ -114,7 +115,7 @@
       for (var i = 0, l = items.length; i < l; i++) {
         id = items[i][idProperty];
         if (id === undefined || idxById[id] !== i) {
-          throw "Each data element must implement a unique 'id' property";
+            items[i][idProperty] = newId++;
         }
       }
     }
